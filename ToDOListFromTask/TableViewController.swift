@@ -123,13 +123,12 @@ class TableViewController: UITableViewController, UISearchBarDelegate {
     
     func editCellContent(indexPath: IndexPath) {
 
-        let cell = tableView(tableView, cellForRowAt: indexPath) as! CustomCell
-        
         alert = UIAlertController(title: "Edit your task", message: nil, preferredStyle: .alert)
 
-        alert.addTextField(configurationHandler: { (textField) -> Void in
+        alert.addTextField(configurationHandler: { [self] (textField) -> Void in
             textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(_:)), for: .editingChanged)
-            textField.text = cell.customCellTextLabel.text
+            
+            textField.text = model.toDoItems[indexPath.row].string
             
         })
         
